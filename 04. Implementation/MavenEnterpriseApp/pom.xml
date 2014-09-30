@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany</groupId>
+  <artifactId>MavenEnterpriseApp</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>MavenEnterpriseApp Maven Enterprise Application</name>
+  <url>http://maven.apache.org</url>
+
+  <distributionManagement>
+    <repository>
+      <id>archiva.internal</id>
+      <url>http://localhost:8080/archiva/repository/internal/</url>
+    </repository>
+  </distributionManagement>
+
+
+  <!-- Added by Shukumar -->
+  	<scm>
+		<!--<connection>scm:svn:https://coconet-svn-in-01.capgemini.com/svn/repos/java_ci_testcode</connection>-->
+            <connection>scm:svn:https://coconet-svn-in-01.capgemini.com/svn/repos/java_ci_testcode/branch2/04. Implementation/MavenEnterpriseApp</connection>
+            <developerConnection>scm:svn:https://coconet-svn-in-01.capgemini.com/svn/repos/java_ci_testcode/branch2/04. Implementation/MavenEnterpriseApp</developerConnection>
+
+	</scm>
+
+
+  <modules>
+    <module>MavenEnterpriseApp-ear</module>
+    <module>MavenEnterpriseApp-web</module>
+    <module>MavenEnterpriseApp-ejb</module>
+  </modules>
+  <properties>
+		<ear.release.directory>C:/releases</ear.release.directory>
+		<parentpath>$/ADC/MavenEnterpriseApp</parentpath>
+		<tdi.projectid>325af758-6074-4008-bbbb-68da71e5adbf</tdi.projectid>
+		<maven.slocci.exclude.folder>*generated*|*jaxb_*</maven.slocci.exclude.folder>
+		<maven.slocci.exclude.file></maven.slocci.exclude.file>
+		<!-- you can also specify this on the level of a module -->
+		<checkstyle.excludes>**/generated/*.java</checkstyle.excludes>
+	</properties>
+</project>

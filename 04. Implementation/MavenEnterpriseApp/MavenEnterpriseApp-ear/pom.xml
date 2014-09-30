@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+        <artifactId>MavenEnterpriseApp</artifactId>
+        <groupId>com.mycompany</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+  <groupId>com.mycompany</groupId>
+  <artifactId>MavenEnterpriseAppear</artifactId>
+  <packaging>ear</packaging>
+  <version>1.1</version>
+  <name>MavenEnterpriseApp-ear JavaEE6 Assembly</name>
+  <url>http://maven.apache.org</url>
+
+  <distributionManagement>
+    <repository>
+      <id>archiva.internal</id>
+      <url>http://localhost:8080/archiva/repository/internal/</url>
+    </repository>
+  </distributionManagement>
+
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.0.2</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+            <version>6</version>
+        </configuration>
+      </plugin>
+    </plugins>
+    <!-- <finalName>MavenEnterpriseApp-${mea-version}</finalName> -->
+
+  </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>MavenEnterpriseApp-ejb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>MavenEnterpriseApp-web</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+	<profiles>
+			<profile>
+			<id>copy-ear</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>dependency-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy</id>
+								<phase>install</phase>
+								<goals>
+									<goal>copy</goal>
+								</goals>
+								<configuration>
+									<artifactItems>
+										<artifactItem>
+											<groupId>${project.groupId}</groupId>
+											<artifactId>${artifactId}</artifactId>
+											<version>${mea-version}</version>
+											<type>ear</type>
+											<destFileName>${artifactId}-${mea-version}.ear</destFileName>
+										</artifactItem>
+									</artifactItems>
+									<outputDirectory>${ear.release.directory}</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
+
